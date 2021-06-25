@@ -8,9 +8,9 @@
   "keywords": [],
   "main": "src/js/main.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --open",
+    "start": "npx cross-env NODE_ENV=development webpack serve --config webpack.dev.js --open",
     "clean": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
+    "build": "npx cross-env NODE_ENV=production webpack --config webpack.prod.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",

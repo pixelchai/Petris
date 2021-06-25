@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -14,10 +14,8 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(),
-        new CopyWebpackPlugin([{ from: "res/", to: "res/" }], {
-            ignore: [],
-            debug: "debug",
-            copyUnmodified: true,
+        new CopyPlugin({
+            patterns: [{ from: "res", to: "res" }],
         }),
         new HtmlPlugin({
             file: path.join(__dirname, "dist", "index.html"),
