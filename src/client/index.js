@@ -1,5 +1,4 @@
 import * as PIXI from "pixi.js";
-import { TestFunction } from "../common/test";
 
 const app = new PIXI.Application({
     width: 720,
@@ -19,5 +18,3 @@ app.stage.addChild(bunny);
 app.ticker.add((delta) => {
     bunny.rotation -= 0.01 * delta;
 });
-
-TestFunction();
