@@ -175,6 +175,12 @@ export class Piece {
         return this.shapeTensor[this.rotationIndex];
     }
 
+    get shapeTypeName() {
+        return Object.keys(ShapeTypes).find(
+            (k) => ShapeTypes[k] === this.shapeType
+        );
+    }
+
     get spaceLeft() {
         let ret = -1;
         for (let row = 0; row < this.shape.length; row++) {

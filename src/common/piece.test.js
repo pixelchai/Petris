@@ -27,17 +27,48 @@ describe("rotation index calculations", () => {
 });
 
 describe("spacing calculations", () => {
-    test("Shape J", () => {
-        let piece = new Piece(ShapeTypes.SHAPE_J);
-        expect(piece.spaceLeft).toEqual(0);
-        expect(piece.spaceRight).toEqual(0);
-        expect(piece.spaceTop).toEqual(0);
-        expect(piece.spaceBottom).toEqual(1);
+    /**
+     * @param {Piece} piece
+     * @param {String} values expected [spaceLeft, spaceRight, etc] values for each rotation of the piece
+     */
+    let expectPiece = (piece, values) => {
+        test(piece.shapeTypeName, () => {
+            let remainingValues = [...values];
+            // prettier-ignore
+            while (remainingValues.length > 0) {
+            let [spaceLeft, spaceRight, spaceTop, spaceBottom, width, height] 
+                = remainingValues.pop();
 
-        piece.rotateClockwise();
-        expect(piece.spaceLeft).toEqual(1);
-        expect(piece.spaceRight).toEqual(0);
-        expect(piece.spaceTop).toEqual(0);
-        expect(piece.spaceBottom).toEqual(0);
-    });
+            try {
+                if (!spaceLeft === undefined)
+                    expect(piece.spaceLeft).toEqual(spaceLeft);
+
+                if (!spaceRight === undefined)
+                    expect(piece.spaceRight).toEqual(spaceRight);
+
+                if (!spaceTop === undefined)
+                    expect(piece.spaceTop).toEqual(spaceTop);
+
+                if (!spaceBottom === undefined)
+                    expect(piece.spaceBottom).toEqual(spaceBottom);
+
+                if (!width === undefined)
+                    expect(piece.width).toEqual(width);
+
+                if (!height === undefined)
+                    expect(piece.height).toEqual(height);
+            } finally {
+                piece.rotateClockwise();
+            }
+
+            }
+        });
+    };
+
+    expectPiece(new Piece(ShapeTypes.SHAPE_J), [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+    ]);
 });
