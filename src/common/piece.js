@@ -160,7 +160,7 @@ const ShapeTensors = Object.freeze([
     ],
 ]);
 
-export default class Piece {
+export class Piece {
     constructor(shapeType) {
         this.shapeType = shapeType;
 
@@ -169,5 +169,40 @@ export default class Piece {
         this.rotationIndex = 0;
 
         this.shapeTensor = ShapeTensors[this.shapeType];
+    }
+
+    get shape() {
+        return this.shapeTensor[this.rotationIndex];
+    }
+
+    get spaceLeft() {
+        let ret = -1;
+        for (let row = 0; row < this.shape.length; row++) {
+            for (let col = 0; col < this.shape[row].length; col++) {
+                if (this.shape[row][col] == 1) {
+                    if (ret == -1 || col < ret) {
+                        ret = col;
+                    }
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
+    get spaceRight() {
+        let ret = -1;
+        for (let row = 0; row < this.shape.length; row++) {
+            for (let col = this.shape[row].length - 1; col >= 0; col--) {
+                if (this.shape[row][col] == 1) {
+                    let newRet = this.shape[row].length - 1 - col;
+                    if (ret == -1 || newRet < ret) {
+                        ret = newRet;
+                    }
+                    break;
+                }
+            }
+        }
+        return ret;
     }
 }
