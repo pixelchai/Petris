@@ -26,7 +26,7 @@ describe("rotation index calculations", () => {
     });
 });
 
-describe("spacing calculations", () => {
+describe("space/width/height(/rotation) calculations", () => {
     /**
      * @param {Piece} piece
      * @param {String} values expected [spaceLeft, spaceRight, etc] values for each rotation of the piece
@@ -40,22 +40,22 @@ describe("spacing calculations", () => {
                 = remainingValues.pop();
 
             try {
-                if (!spaceLeft === undefined)
+                if (spaceLeft !== undefined)
                     expect(piece.spaceLeft).toEqual(spaceLeft);
 
-                if (!spaceRight === undefined)
+                if (spaceRight !== undefined)
                     expect(piece.spaceRight).toEqual(spaceRight);
 
-                if (!spaceTop === undefined)
+                if (spaceTop !== undefined)
                     expect(piece.spaceTop).toEqual(spaceTop);
 
-                if (!spaceBottom === undefined)
+                if (spaceBottom !== undefined)
                     expect(piece.spaceBottom).toEqual(spaceBottom);
 
-                if (!width === undefined)
+                if (width !== undefined)
                     expect(piece.width).toEqual(width);
 
-                if (!height === undefined)
+                if (height !== undefined)
                     expect(piece.height).toEqual(height);
             } finally {
                 piece.rotateClockwise();
@@ -66,10 +66,10 @@ describe("spacing calculations", () => {
     };
 
     expectPiece(new Piece(ShapeTypes.SHAPE_I), [
-        [0, 0, 1, 2],
-        [2, 1, 0, 0],
-        [0, 0, 2, 1],
-        [1, 2, 0, 0],
+        [0, 0, 1, 2, 4, 1],
+        [2, 1, 0, 0, 1, 4],
+        [0, 0, 2, 1, 4, 1],
+        [1, 2, 0, 0, 1, 4],
     ]);
     expectPiece(new Piece(ShapeTypes.SHAPE_J), [
         [0, 0, 0, 1],

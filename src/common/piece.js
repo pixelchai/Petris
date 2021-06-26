@@ -236,6 +236,14 @@ export class Piece {
         throw "Empty shape?!";
     }
 
+    get width() {
+        return this.shape[0].length - this.spaceLeft - this.spaceRight;
+    }
+
+    get height() {
+        return this.shape.length - this.spaceTop - this.spaceBottom;
+    }
+
     rotateClockwise() {
         this.rotationIndex = (this.rotationIndex + 1) % this.shapeTensor.length;
     }
