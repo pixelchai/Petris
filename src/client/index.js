@@ -21,5 +21,5 @@
 
 import { Piece, ShapeTypes } from "../common/piece";
 
-let piece = new Piece(ShapeTypes.SHAPE_J);
-console.log(piece);
+window.piece = new Piece(ShapeTypes.SHAPE_J);
+console.log(window.piece);
