@@ -42,7 +42,9 @@ describe("space/width/height calculations", () => {
             "$shapeTypeName@$rotationIndex",
             ({ shapeType, rotationIndex, values }) => {
                 let piece = new Piece(shapeType);
-                piece.rotationIndex = rotationIndex;
+                for (let index = 0; index < rotationIndex; index++) {
+                    piece.rotateClockwise();
+                }
 
                 let [
                     spaceLeft,
