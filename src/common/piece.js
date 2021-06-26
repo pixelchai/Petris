@@ -205,4 +205,18 @@ export class Piece {
         }
         return ret;
     }
+
+    rotateClockwise() {
+        this.rotationIndex = (this.rotationIndex + 1) % this.shapeTensor.length;
+    }
+
+    rotateAnticlockwise() {
+        if (this.rotationIndex > 0) {
+            this.rotationIndex -= 1;
+        } else if (this.rotationIndex == 0) {
+            this.rotationIndex = this.shapeTensor.length - 1;
+        } else {
+            throw "rotationIndex invalid!"; // should theoretically never happen
+        }
+    }
 }

@@ -9,8 +9,9 @@
   "main": "src/js/main.js",
   "scripts": {
     "start": "npx cross-env NODE_ENV=development webpack serve --config webpack.dev.js --open",
+    "build": "npx cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "clean": "rimraf dist",
-    "build": "npx cross-env NODE_ENV=production webpack --config webpack.prod.js"
+    "test": "npx jest"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
@@ -21,11 +22,13 @@
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
+    "babel-jest": "^27.0.5",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.0.5",
     "rimraf": "^3.0.2",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2",
