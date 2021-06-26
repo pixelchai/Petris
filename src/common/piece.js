@@ -161,11 +161,11 @@ const ShapeTensors = Object.freeze([
 ]);
 
 export class Piece {
-    constructor(shapeType) {
+    constructor(shapeType, x = null, y = null) {
         this.shapeType = shapeType;
 
-        this.x = -1;
-        this.y = -1;
+        this.x = x;
+        this.y = y;
         this.rotationIndex = 0;
 
         this.shapeTensor = ShapeTensors[this.shapeType];

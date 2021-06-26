@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach } from "@jest/globals";
+import { describe, expect, test } from "@jest/globals";
 import { Piece, ShapeTypes } from "../common/piece";
 
 describe("rotation index calculations", () => {
