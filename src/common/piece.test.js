@@ -31,9 +31,13 @@ describe("spacing calculations", () => {
         let piece = new Piece(ShapeTypes.SHAPE_J);
         expect(piece.spaceLeft).toEqual(0);
         expect(piece.spaceRight).toEqual(0);
+        expect(piece.spaceTop).toEqual(0);
+        expect(piece.spaceBottom).toEqual(1);
 
         piece.rotateClockwise();
         expect(piece.spaceLeft).toEqual(1);
         expect(piece.spaceRight).toEqual(0);
+        expect(piece.spaceTop).toEqual(0);
+        expect(piece.spaceBottom).toEqual(0);
     });
 });

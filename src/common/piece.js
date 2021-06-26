@@ -206,6 +206,30 @@ export class Piece {
         return ret;
     }
 
+    get spaceTop() {
+        for (let row = 0; row < this.shape.length; row++) {
+            for (let col = 0; col < this.shape[row].length; col++) {
+                if (this.shape[row][col] == 1) {
+                    return row;
+                }
+            }
+        }
+        throw "Empty shape?!"; // theoretically should only happen if shape matrix has no ones
+    }
+
+    get spaceBottom() {
+        let ret = 0;
+        for (let row = this.shape.length - 1; row >= 0; row--) {
+            for (let col = 0; col < this.shape[row].length; col++) {
+                if (this.shape[row][col] == 1) {
+                    return ret;
+                }
+            }
+            ret++;
+        }
+        throw "Empty shape?!";
+    }
+
     rotateClockwise() {
         this.rotationIndex = (this.rotationIndex + 1) % this.shapeTensor.length;
     }
