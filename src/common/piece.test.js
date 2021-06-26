@@ -1,4 +1,4 @@
-import { describe, expect, test } from "@jest/globals";
+import { describe, expect, test, beforeEach } from "@jest/globals";
 import { Piece, ShapeTypes } from "../common/piece";
 
 describe("rotation index calculations", () => {
@@ -26,20 +26,33 @@ describe("rotation index calculations", () => {
     });
 });
 
-describe("space/width/height(/rotation) calculations", () => {
+describe("space/width/height calculations", () => {
     /**
-     * @param {Piece} piece
-     * @param {String} values expected [spaceLeft, spaceRight, etc] values for each rotation of the piece
+     * @param {Number} shapeType
+     * @param {String} valuesPerRotation expected [spaceLeft, spaceRight, etc] values for each rotation of the piece
      */
-    let expectPiece = (piece, values) => {
-        test(piece.shapeTypeName, () => {
-            let remainingValues = [...values];
-            // prettier-ignore
-            while (remainingValues.length > 0) {
-            let [spaceLeft, spaceRight, spaceTop, spaceBottom, width, height] 
-                = remainingValues.pop();
+    let testPiece = (shapeType, valuesPerRotation) => {
+        let table = [];
+        valuesPerRotation.forEach((values, rotationIndex) => {
+            let shapeTypeName = Object.keys(ShapeTypes)[shapeType];
+            table.push({ shapeTypeName, shapeType, rotationIndex, values });
+        });
 
-            try {
+        test.each(table)(
+            "$shapeTypeName@$rotationIndex",
+            ({ shapeType, rotationIndex, values }) => {
+                let piece = new Piece(shapeType);
+                piece.rotationIndex = rotationIndex;
+
+                let [
+                    spaceLeft,
+                    spaceRight,
+                    spaceTop,
+                    spaceBottom,
+                    width,
+                    height,
+                ] = values;
+
                 if (spaceLeft !== undefined)
                     expect(piece.spaceLeft).toEqual(spaceLeft);
 
@@ -52,57 +65,51 @@ describe("space/width/height(/rotation) calculations", () => {
                 if (spaceBottom !== undefined)
                     expect(piece.spaceBottom).toEqual(spaceBottom);
 
-                if (width !== undefined)
-                    expect(piece.width).toEqual(width);
+                if (width !== undefined) expect(piece.width).toEqual(width);
 
-                if (height !== undefined)
-                    expect(piece.height).toEqual(height);
-            } finally {
-                piece.rotateClockwise();
+                if (height !== undefined) expect(piece.height).toEqual(height);
             }
-
-            }
-        });
+        );
     };
 
-    expectPiece(new Piece(ShapeTypes.SHAPE_I), [
+    testPiece(ShapeTypes.SHAPE_I, [
         [0, 0, 1, 2, 4, 1],
         [2, 1, 0, 0, 1, 4],
         [0, 0, 2, 1, 4, 1],
         [1, 2, 0, 0, 1, 4],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_J), [
+    testPiece(ShapeTypes.SHAPE_J, [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
         [0, 1, 0, 0],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_L), [
+    testPiece(ShapeTypes.SHAPE_L, [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
         [0, 1, 0, 0],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_O), [
+    testPiece(ShapeTypes.SHAPE_O, [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_S), [
+    testPiece(ShapeTypes.SHAPE_S, [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
         [0, 1, 0, 0],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_T), [
+    testPiece(ShapeTypes.SHAPE_T, [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
         [0, 1, 0, 0],
     ]);
-    expectPiece(new Piece(ShapeTypes.SHAPE_Z), [
+    testPiece(ShapeTypes.SHAPE_Z, [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
