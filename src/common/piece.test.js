@@ -65,7 +65,44 @@ describe("spacing calculations", () => {
         });
     };
 
+    expectPiece(new Piece(ShapeTypes.SHAPE_I), [
+        [0, 0, 1, 2],
+        [2, 1, 0, 0],
+        [0, 0, 2, 1],
+        [1, 2, 0, 0],
+    ]);
     expectPiece(new Piece(ShapeTypes.SHAPE_J), [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+    ]);
+    expectPiece(new Piece(ShapeTypes.SHAPE_L), [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+    ]);
+    expectPiece(new Piece(ShapeTypes.SHAPE_O), [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+    ]);
+    expectPiece(new Piece(ShapeTypes.SHAPE_S), [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+    ]);
+    expectPiece(new Piece(ShapeTypes.SHAPE_T), [
+        [0, 0, 0, 1],
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+    ]);
+    expectPiece(new Piece(ShapeTypes.SHAPE_Z), [
         [0, 0, 0, 1],
         [1, 0, 0, 0],
         [0, 0, 1, 0],
