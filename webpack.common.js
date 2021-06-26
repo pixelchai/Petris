@@ -4,11 +4,11 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-    context: path.join(__dirname, "src"),
-    entry: ["./js/main.js"],
+    context: path.join(__dirname, "src", "client"),
+    entry: ["./index.js"],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "game.min.[hash:8].js",
+        filename: "[name].[contenthash].bundle.js",
     },
     target: "web",
 

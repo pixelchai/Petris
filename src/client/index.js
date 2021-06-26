@@ -1,9 +1,10 @@
 import * as PIXI from "pixi.js";
+import { TestFunction } from "../common/test";
 
 const app = new PIXI.Application({
     width: 720,
     height: 1280,
-    backgroundColor: 0x1099bb,
+    backgroundColor: 0x0,
     view: document.querySelector("#scene"),
     resolution: window.devicePixelRatio || 1,
 });
@@ -18,3 +19,5 @@ app.stage.addChild(bunny);
 app.ticker.add((delta) => {
     bunny.rotation -= 0.01 * delta;
 });
+
+TestFunction();
