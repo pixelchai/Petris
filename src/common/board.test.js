@@ -2,7 +2,6 @@ import { describe, expect, test } from "@jest/globals";
 import { commitPiece } from "../common/board";
 import { Piece, ShapeTypes } from "../common/piece";
 
-// todo add a test for graceful handling of out of bounds placement
 test("committing", () => {
     let testMatrix = [
         [0, 0, 0, 0, 0],
@@ -29,6 +28,7 @@ test("committing", () => {
     ]);
 
     // commit with matrix partially out of bounds
+    // fixme !!
     testPiece.rotationIndex = 3;
     testPiece.x = 3;
     commitPiece(testMatrix, testPiece);

@@ -12,8 +12,14 @@ export const BoardFlags = Object.freeze({
 export function commitPiece(field, piece) {
     piece.shape.forEach((shapeRow, j) => {
         shapeRow.forEach((element, i) => {
-            // fixme out of bounds
-            field[j + piece.y][i + piece.x] |= element;
+            let targetY = j + piece.y;
+            let targetX = i + piece.x;
+
+            if (0 <= targetY && targetY <= field.length - 1) {
+                if (0 <= targetX && targetX <= field[targetY].length - 1) {
+                    field[targetY][targetX] |= element;
+                }
+            }
         });
     });
 }
