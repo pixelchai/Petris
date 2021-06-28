@@ -19,7 +19,9 @@
 //     bunny.rotation -= 0.01 * delta;
 // });
 
+import { Board } from "../common/board";
 import { Piece, ShapeTypes } from "../common/piece";
 
-window.piece = new Piece(ShapeTypes.SHAPE_J);
-console.log(window.piece);
+window.board = new Board();
+window.board.newFalling();
+console.log(window.board.debugString);

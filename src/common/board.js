@@ -1,3 +1,6 @@
+import { getRandomInt, shuffle } from "../common/utils";
+import { ShapeTypes, Piece } from "../common/piece";
+
 export const BoardFlags = Object.freeze({
     EMPTY: 0,
     AT_REST: 1 << 0,
@@ -24,7 +27,7 @@ export function commitPiece(field, piece) {
     });
 }
 
-export default class Board {
+export class Board {
     constructor() {
         this.fieldWidth = 10;
         this.fieldHeight = 22;
@@ -41,10 +44,62 @@ export default class Board {
 
         this.flags = BoardFlags.EMPTY;
         this.fallingPiece = null;
+
+        this.shapeTypeQueue = [];
     }
 
     /**
      * Field with fallingPiece committed
      */
-    get field() {}
+    get field() {
+        if (this.fallingPiece !== null) {
+            // deep copy of staticField
+            let retField = [];
+            for (let i = 0; i < this.staticField.length; i++) {
+                retField[i] = this.staticField[i].slice();
+            }
+
+            commitPiece(retField, this.fallingPiece);
+            return retField;
+        } else {
+            return this.staticField;
+        }
+    }
+
+    get debugString() {
+        let ret = "";
+        this.field.forEach((fieldRow, j) => {
+            fieldRow.forEach((element, i) => {
+                if (element) {
+                    ret += "#";
+                } else {
+                    ret += ".";
+                }
+            });
+            ret += "\n";
+        });
+        return ret;
+    }
+
+    newFalling() {
+        if (this.shapeTypeQueue.length <= 0) {
+            // generate new shuffled shape type queue
+            this.shapeTypeQueue = Object.values(ShapeTypes); // returns a copy
+            shuffle(this.shapeTypeQueue);
+        }
+        let newShapeType = this.shapeTypeQueue.pop();
+        let newPiece = new Piece(newShapeType);
+        newPiece.x = getRandomInt(
+            0 - newPiece.spaceLeft,
+            this.fieldWidth - newPiece.spaceRight
+        );
+        newPiece.y = 0 - newPiece.spaceTop;
+
+        // todo check overlap
+        this.fallingPiece = newPiece;
+    }
+
+    step() {
+        this.flags = BoardFlags.EMPTY;
+    }
 }
